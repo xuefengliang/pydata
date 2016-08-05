@@ -132,7 +132,7 @@ obj.rank(method='first')
 
 obj = Series(range(5), index=['a', 'a', 'b', 'b', 'c'])
 obj.index.is_unique
-df=DataFrame(np.random.randn(4,3),index=['a','a','b','b'])
+df = DataFrame(np.random.randn(4, 3), index=['a', 'a', 'b', 'b'])
 df.ix['b']
 
 df = DataFrame([[1.4, np.nan], [7.1, -4.5], [np.nan, np.nan], [0.75, -1.3]], index=['a', 'b', 'c', 'd'],
@@ -142,53 +142,55 @@ df.sum(axis=0)
 df.idxmax()
 df.describe()
 
-obj=Series(['a','a','b','c']*4)
+obj = Series(['a', 'a', 'b', 'c'] * 4)
 obj.describe()
 
 import pandas.io.data as web
-all_data={}
-for ticker in ['AAPL','IBM','MSFT','GOOG']:
-    all_data[ticker]=web.get_data_yahoo(ticker,'1/1/2000','1/1/2010')
 
-price=DataFrame({tic:data['Adj Close'] for tic,data in all_data.iteritems()})
-volume=DataFrame({tic:data['Volume'] for tic,data in all_data.iteritems()})
-returns=price.pct_change()
+all_data = {}
+for ticker in ['AAPL', 'IBM', 'MSFT', 'GOOG']:
+    all_data[ticker] = web.get_data_yahoo(ticker, '1/1/2000', '1/1/2010')
+
+price = DataFrame({tic: data['Adj Close'] for tic, data in all_data.iteritems()})
+volume = DataFrame({tic: data['Volume'] for tic, data in all_data.iteritems()})
+returns = price.pct_change()
 returns.tail()
 
-string_data=Series(['aardvark','artichoke',np.nan,'avocado'])
+string_data = Series(['aardvark', 'artichoke', np.nan, 'avocado'])
 string_data.isnull()
-string_data[0]=None
+string_data[0] = None
 string_data.isnull()
 
 from numpy import nan as NA
-data=Series([1,NA,3.5,NA,7])
+
+data = Series([1, NA, 3.5, NA, 7])
 data.dropna()
 
-data=DataFrame([[1.,6.5,3.],[1.,NA,NA],[NA,NA,NA],[NA,6.5,3.]])
-cleaned=data.dropna()
+data = DataFrame([[1., 6.5, 3.], [1., NA, NA], [NA, NA, NA], [NA, 6.5, 3.]])
+cleaned = data.dropna()
 data.dropna(how='all')
-data.dropna(axis=1,how='all')
+data.dropna(axis=1, how='all')
 
-df=DataFrame(np.random.randn(7,3))
-df.ix[:4,1]=NA
-df.ix[:2,2]=NA
+df = DataFrame(np.random.randn(7, 3))
+df.ix[:4, 1] = NA
+df.ix[:2, 2] = NA
 df.dropna(thresh=3)
 
-df=DataFrame([[1.,6.5,3.],[1.,NA,NA],[NA,NA,NA],[NA,6.5,3.]])
+df = DataFrame([[1., 6.5, 3.], [1., NA, NA], [NA, NA, NA], [NA, 6.5, 3.]])
 df.fillna(0)
-df.fillna({1:4,1:2,-1:4})
+df.fillna({1: 4, 1: 2, -1: 4})
 
-df=DataFrame(np.random.randn(6,3))
-df.ix[2:,1]=NA
-df.ix[4:,2]=NA
+df = DataFrame(np.random.randn(6, 3))
+df.ix[2:, 1] = NA
+df.ix[4:, 2] = NA
 df.fillna(method='ffill')
-df.fillna(method='ffill',limit=2)
+df.fillna(method='ffill', limit=2)
 
-ser=Series(np.arange(3.))
-ser2=Series(np.arange(3.),index=['a','b','c'])
+ser = Series(np.arange(3.))
+ser2 = Series(np.arange(3.), index=['a', 'b', 'c'])
 
-ser3=Series(range(3),index=[-5,1,3])
+ser3 = Series(range(3), index=[-5, 1, 3])
 ser3.iget_value(2)
 
-frame=DataFrame(np.arange(6).reshape(3,2),index=[2,0,1])
+frame = DataFrame(np.arange(6).reshape(3, 2), index=[2, 0, 1])
 frame.irow(0)
