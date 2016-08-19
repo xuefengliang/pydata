@@ -2,6 +2,7 @@ import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 from numpy.random import randn
+from ggplot import *
 
 plt.plot(np.arange(10))
 fig=plt.figure()
@@ -98,12 +99,17 @@ party_pcts=party_counts.div(party_counts.sum(1).astype(float),axis=0)
 tips['tip_pct']=tips['tip']/tips['total_bill']
 tips['tip_pct'].hist(bins=50)
 #tips['tip_pct'].plot(kind='kde')
+ggplot(tips,aes(x='tip_pct'))+geom_histogram()+geom_density()
 
 com1=np.random.normal(0,1,size=200)
 com2=np.random.normal(10,2,size=200)
 values=pd.Series(np.concatenate([com1,com2]))
 values.hist(bins=100,alpha=0.3,color='k',normed=True)
 #values.plot(kind='kde',style='k--')
+df=pd.DataFrame(values,columns=['comp'])
+ggplot(df,aes(x='comp'))+geom_density()+ggtitle("Cars") + xlab("Weight") + ylab("MPG")
+
+
 
 macro=pd.read_csv('/home/xuefliang/Downloads/pydata-book-master/ch08/macrodata.csv')
 data=macro[['cpi','m1','tbilrate','unemp']]
